@@ -2,6 +2,8 @@
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 3fr;
+    margin: 10px 20px;
+    margin-bottom: 0;
 }
 
 .quote-price{
@@ -9,8 +11,46 @@
     grid-row: 1 / span 2;
 }
 
-.quote-title{
+.quote-header{
     background-color: blue;
     color:white;
+    height: 20%;
+    text-align: center;
+    font-family: sans-serif;
+    font-weight: 600;
 }
 
+.quote-body{
+    height: 80%;
+    text-align: center;
+    font-size: 40px;
+    font-family: sans-serif;
+}
+
+.quote-channel{
+    font-size: 14px;
+    font-family: sans-serif;
+    align-self: center;
+}
+
+.quote-channel-title{
+    display: flex;
+}
+
+.quote-days-delivery{
+    font-family: sans-serif;
+    color: #4129c7;
+    font-weight: 700;
+    font-size: 20px;
+    padding-top: 10px;
+}
+.quote-estimated-delivery{
+    font-size: 15px;
+    font-family: sans-serif;
+}
+
+.quote-delivery-dates{
+    font-size: 15px;
+    font-family: sans-serif;
+    font-weight: bold;
+}

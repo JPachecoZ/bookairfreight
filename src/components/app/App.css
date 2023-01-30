@@ -3,8 +3,26 @@
   flex-direction: column;
 }
 
+.app-label{
+  font-family: sans-serif;  
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+
+.app-button{
+  margin: 10px 0px;
+  width: 100px;
+  border: none;
+  border-radius: 3px;
+  padding: 10px;
+  background-color: #3898ec;
+  color: white;
+}
+
 .form-container{
   display: flex;
   flex-direction: column;
   max-width: 150px;
 }
+

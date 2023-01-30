@@ -33,12 +33,12 @@ export function App() {
     <div className="app-container">
       <form onSubmit={handleSubmit} className="form-container">
         {fields.map((field) => 
-          <label key={field} className="label">
+          <label key={field} className="app-label">
             {field}
             <input type="text" name={field} />
           </label>
         )}
-        <label className="label">
+        <label className="app-label">
           Shipping Channel
           <select name="Shipping channel" id="Shipping channel">
             {shippingChannels.map((channel) =>
@@ -46,9 +46,8 @@ export function App() {
             )}
           </select>
         </label>
-        <button type="submit">Create quote</button>
+        <button className="app-button" type="submit">Create quote</button>
       </form>
-      <p>{JSON.stringify(quote)}</p>
       <Quote quote={quote}/>
     </div>
   );
