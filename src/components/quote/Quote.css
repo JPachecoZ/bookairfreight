@@ -4,3 +4,13 @@
     grid-template-columns: 1fr 3fr;
 }
 
+.quote-price{
+    grid-column: 2;
+    grid-row: 1 / span 2;
+}
+
+.quote-title{
+    background-color: blue;
+    color:white;
+}
+
