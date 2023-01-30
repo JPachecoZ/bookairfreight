@@ -1,39 +1,55 @@
 import './App.css';
+import { Quote } from '../quote/Quote';
 import { useState } from 'react';
 
 export function App() {
-  let fields = ["Starting Country", "Destination Country", "Quote Price"]
+  let fields = ["Starting country", "Destination country", "Quote price"]
   let shippingChannels = ["Ocean", "Air"]
 
   const [quote, setQuote] = useState({
-    "Starting Country": "",
-    "Destination Country": "",
-    "Quote Price": 0,
-    "Shipping Channel": ""
+    "Starting country": "",
+    "Destination country": "",
+    "Quote price": 0,
+    "Shipping channel": ""
   })
 
-  const handleChange =(event)=>{
-    const { name, value } = event.target
-    setQuote({...quote, [name]: value})
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const startingCountry = event.target.elements["Starting country"].value
+    const destinationCountry = event.target.elements["Destination country"].value
+    const quotePrice = event.target.elements["Quote price"].value
+    const shippingChannel = event.target.elements["Shipping channel"].value
+
+    setQuote({
+      ...quote, 
+      "Starting country": startingCountry, 
+      "Destination country": destinationCountry, 
+      "Quote price": quotePrice, 
+      "Shipping channel": shippingChannel
+    })
   }
 
   return (
-    <div class="container">
-      {fields.map((field, index) => 
-        <label class="label">
-          {field}
-          <input key={index} type="text" name={field} onChange={handleChange} value={quote[field]}/>
+    <div className="app-container">
+      <form onSubmit={handleSubmit} className="form-container">
+        {fields.map((field) => 
+          <label key={field} className="label">
+            {field}
+            <input type="text" name={field} />
+          </label>
+        )}
+        <label className="label">
+          Shipping Channel
+          <select name="Shipping channel" id="Shipping channel">
+            {shippingChannels.map((channel) =>
+            <option key={channel} >{channel}</option>
+            )}
+          </select>
         </label>
-      )}
-      <label class="label">
-        Shipping Channel
-        <select name="Shipping Channel" id="Shipping Channel" onChange={handleChange}>
-          {shippingChannels.map((channel, index) =>
-          <option key={index} value={channel}>{channel}</option>
-          )}
-        </select>
-      </label>
+        <button type="submit">Create quote</button>
+      </form>
       <p>{JSON.stringify(quote)}</p>
+      <Quote quote={quote}/>
     </div>
   );
 }
