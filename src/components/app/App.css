@@ -1,6 +1,8 @@
 .app-container{
   display: flex;
   flex-direction: column;
+  margin: 10px 20px;
+  margin-bottom: 0;
 }
 
 .app-label{
@@ -25,4 +27,3 @@
   flex-direction: column;
   max-width: 150px;
 }
-

@@ -13,6 +13,8 @@ export function App() {
     "Shipping channel": ""
   })
 
+  const [showQuote, setShowQuote] = useState(false)
+
   const handleSubmit = (event) => {
     event.preventDefault()
     const startingCountry = event.target.elements["Starting country"].value
@@ -27,6 +29,7 @@ export function App() {
       "Quote price": quotePrice, 
       "Shipping channel": shippingChannel
     })
+    setShowQuote(true)
   }
 
   return (
@@ -48,7 +51,7 @@ export function App() {
         </label>
         <button className="app-button" type="submit">Create quote</button>
       </form>
-      <Quote quote={quote}/>
+      {showQuote && <Quote quote={quote}/>}
     </div>
   );
 }

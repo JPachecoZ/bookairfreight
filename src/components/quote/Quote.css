@@ -2,13 +2,13 @@
     display: grid;
     width: 100%;
     grid-template-columns: 1fr 3fr;
-    margin: 10px 20px;
-    margin-bottom: 0;
+    border: 1px solid;
 }
 
 .quote-price{
     grid-column: 2;
     grid-row: 1 / span 2;
+    border-left: 1px solid;
 }
 
 .quote-header{
@@ -35,6 +35,7 @@
 
 .quote-channel-title{
     display: flex;
+    border-bottom: 1px solid;
 }
 
 .quote-days-delivery{
@@ -53,4 +54,8 @@
     font-size: 15px;
     font-family: sans-serif;
     font-weight: bold;
+}
+
+.quote-channel-body{
+    text-align: center;
 }
