@@ -3,7 +3,7 @@ import { Quote } from '../quote/Quote';
 import { useState } from 'react';
 
 export function App() {
-  let fields = ["Starting country", "Destination country", "Quote price"]
+  let fields = ["Starting country", "Destination country"]
   let shippingChannels = ["Ocean", "Air"]
 
   const [quote, setQuote] = useState({
@@ -41,6 +41,10 @@ export function App() {
             <input type="text" name={field} required/>
           </label>
         )}
+        <label className="app-label">
+          Quote price
+          <input type="text" name="Quote price" pattern="\d+" required/>
+        </label>
         <label className="app-label">
           Shipping Channel
           <select name="Shipping channel" id="Shipping channel" required>
