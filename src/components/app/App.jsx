@@ -1,61 +1,75 @@
+import { useState } from 'react';
 import './App.css';
 import { Quote } from '../quote/Quote';
-import { useState } from 'react';
 
 export function App() {
-  let fields = ["Starting country", "Destination country"]
-  let shippingChannels = ["Ocean", "Air"]
+  const shippingChannels = ["Ocean", "Air"]
+  const initialPreQuoteValues = { startingCountry: "", destinationCountry: "", quotePrice: 0, shippingChannel: "Air" }
 
-  const [quote, setQuote] = useState({
-    "Starting country": "",
-    "Destination country": "",
-    "Quote price": 0,
-    "Shipping channel": ""
-  })
-
-  const [showQuote, setShowQuote] = useState(false)
+  const [quote, setQuote] = useState()
+  const [preQuote, setPreQuote] = useState(initialPreQuoteValues)
+  const [quoteErrors, setQuoteErrors] = useState({})
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const startingCountry = event.target.elements["Starting country"].value
-    const destinationCountry = event.target.elements["Destination country"].value
-    const quotePrice = event.target.elements["Quote price"].value
-    const shippingChannel = event.target.elements["Shipping channel"].value
+    setQuoteErrors({...quoteErrors, ...validate(preQuote)})
+    if(Object.values(validate(preQuote)).join("")){
+      return
+    }
+    setQuote({...quote, ...preQuote})
+  } 
+  
+  const handleChange = (event) => {
+    setPreQuote({...preQuote, [event.target.name]: event.target.value})
+  }
 
-    setQuote({
-      ...quote, 
-      "Starting country": startingCountry, 
-      "Destination country": destinationCountry, 
-      "Quote price": quotePrice, 
-      "Shipping channel": shippingChannel
-    })
-    setShowQuote(true)
+  const validate = (values) => {
+    const errors = {}
+    errors.startingCountry = !values.startingCountry ? "Starting country is required!" : ""
+    errors.destinationCountry = !values.destinationCountry ? "Destination country is required!" : ""
+    errors.quotePrice =!values.quotePrice ? "Quote price is required!" : ""
+    errors.shippingChannel = !values.shippingChannel ? "Select a shipping channel" : ""
+    return errors
   }
 
   return (
     <div className="app-container">
-      <form onSubmit={handleSubmit} className="form-container">
-        {fields.map((field) => 
-          <label key={field} className="app-label">
-            {field}
-            <input type="text" name={field} required/>
+      <form onSubmit={handleSubmit} className="form-container" noValidate>
+        <div className="input-container">
+          <label className="app-label">
+            Starting country
+            <input type="text" name="startingCountry" onChange={handleChange} value={preQuote.startingCountry}/>
           </label>
-        )}
-        <label className="app-label">
-          Quote price
-          <input type="text" name="Quote price" pattern="\d+" required/>
-        </label>
-        <label className="app-label">
-          Shipping Channel
-          <select name="Shipping channel" id="Shipping channel" required>
-            {shippingChannels.map((channel) =>
-            <option key={channel} >{channel}</option>
-            )}
-          </select>
-        </label>
+          <p className="error-message">{quoteErrors.startingCountry}</p>
+        </div>
+        <div className="input-container">
+          <label className="app-label">
+            Destination country
+            <input type="text" name="destinationCountry" onChange={handleChange} value={preQuote.destinationCountry}/>
+          </label>
+          <p className="error-message">{quoteErrors.destinationCountry}</p>
+        </div>
+        <div className="input-container">
+          <label className="app-label">
+            Quote price
+            <input type="number" name="quotePrice" onChange={handleChange} value={preQuote.quotePrice}/>
+          </label>
+          <p className="error-message">{quoteErrors.quotePrice}</p>
+        </div>
+        <div className="input-container">
+          <label className="app-label">
+            Shipping Channel
+            <select name="shippingChannel" onChange={handleChange} value={preQuote.shippingChannel}>
+              {shippingChannels.map((channel) =>
+              <option key={channel} >{channel}</option>
+              )}
+            </select>
+          </label>
+        <p className="error-message">{quoteErrors.shippingChannel}</p>
+        </div>
         <button className="app-button" type="submit">Create quote</button>
       </form>
-      {showQuote && <Quote quote={quote}/>}
+      {quote && <Quote quote={quote}/>}
     </div>
   );
 }
