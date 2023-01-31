@@ -1,17 +1,55 @@
+.quote-channel-title{
+    display: flex;
+    border-bottom: 1px solid;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 10px;
+}
+
 .quote-container{
     display: grid;
     width: 100%;
-    grid-template-columns: 2fr 5fr;
+    grid-template-columns: 1fr;
     border: 1px solid;
 }
 
 .quote-price{
-    grid-column: 2;
-    grid-row: 1 / span 2;
-    border-left: 1px solid;
+    grid-column: 1;
     display: grid;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 5fr;
+}
+
+.quote-channel-body{
+    text-align: center;
+    border-bottom: 1px solid;
+}
+
+@media (min-width: 640px) {
+    .quote-container{
+        display: grid;
+        width: 100%;
+        grid-template-columns: 2fr 5fr;
+        border: 1px solid;
+    }
+    
+    .quote-price{
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        border-left: 1px solid;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 5fr;
+    }
+
+    .quote-channel-title{
+        border-bottom: 1px solid;
+    }
+
+    .quote-channel-body{
+        border: none;
+    }
 }
 
 .quote-header{
@@ -36,11 +74,6 @@
     align-self: center;
 }
 
-.quote-channel-title{
-    display: flex;
-    border-bottom: 1px solid;
-}
-
 .quote-days-delivery{
     font-family: sans-serif;
     color: #4129c7;
@@ -49,6 +82,7 @@
     padding-top: 10px;
     padding-bottom: 10px;
 }
+
 .quote-estimated-delivery{
     font-size: 15px;
     font-family: sans-serif;
@@ -59,8 +93,4 @@
     font-family: sans-serif;
     font-weight: bold;
     padding-bottom: 14px;
-}
-
-.quote-channel-body{
-    text-align: center;
 }
