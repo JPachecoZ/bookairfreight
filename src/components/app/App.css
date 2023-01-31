@@ -10,7 +10,7 @@
   font-weight: 700;
   font-size: 15px;
   margin-bottom: 10px;
-  max-width: 150px;
+  max-width: 180px;
 }
 
 .app-button{
@@ -31,4 +31,12 @@
 
 .error-message{
   color: red;
+}
+
+.input-container{
+  display:flex;
+}
+
+.input-container p{
+  align-self: center;
 }
