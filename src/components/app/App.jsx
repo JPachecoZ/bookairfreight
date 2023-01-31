@@ -38,12 +38,12 @@ export function App() {
         {fields.map((field) => 
           <label key={field} className="app-label">
             {field}
-            <input type="text" name={field} />
+            <input type="text" name={field} required/>
           </label>
         )}
         <label className="app-label">
           Shipping Channel
-          <select name="Shipping channel" id="Shipping channel">
+          <select name="Shipping channel" id="Shipping channel" required>
             {shippingChannels.map((channel) =>
             <option key={channel} >{channel}</option>
             )}

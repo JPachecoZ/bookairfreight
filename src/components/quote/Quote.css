@@ -1,7 +1,7 @@
 .quote-container{
     display: grid;
     width: 100%;
-    grid-template-columns: 1fr 3fr;
+    grid-template-columns: 2fr 5fr;
     border: 1px solid;
 }
 
@@ -9,19 +9,22 @@
     grid-column: 2;
     grid-row: 1 / span 2;
     border-left: 1px solid;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 5fr;
 }
 
 .quote-header{
     background-color: blue;
     color:white;
-    height: 20%;
+    line-height: 22px;
     text-align: center;
     font-family: sans-serif;
     font-weight: 600;
 }
 
 .quote-body{
-    height: 80%;
+    align-self: center;
     text-align: center;
     font-size: 40px;
     font-family: sans-serif;
@@ -44,6 +47,7 @@
     font-weight: 700;
     font-size: 20px;
     padding-top: 10px;
+    padding-bottom: 10px;
 }
 .quote-estimated-delivery{
     font-size: 15px;
@@ -54,6 +58,7 @@
     font-size: 15px;
     font-family: sans-serif;
     font-weight: bold;
+    padding-bottom: 14px;
 }
 
 .quote-channel-body{

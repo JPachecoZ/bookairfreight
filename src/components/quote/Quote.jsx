@@ -29,7 +29,7 @@ export function Quote({quote}){
             </div>
             <div className='quote-price'>
                 <p className="quote-header">{`${from} -> ${to}`}</p>
-                <p className="quote-body">US$ {price}</p>
+                <p className="quote-body">US$ {(+price).toLocaleString('en-US')}</p>  
             </div>
         </div>
     )
