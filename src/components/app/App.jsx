@@ -3,51 +3,44 @@ import { Quote } from '../quote/Quote';
 import { useState } from 'react';
 
 export function App() {
-  let fields = ["Starting country", "Destination country"]
   let shippingChannels = ["Ocean", "Air"]
 
-  const [quote, setQuote] = useState({
-    "Starting country": "",
-    "Destination country": "",
-    "Quote price": 0,
-    "Shipping channel": ""
+  const [preQuote, setPreQuote] = useState({
+    startingCountry: "",
+    destinationCountry: "",
+    quotePrice: 0,
+    shippingChannel: "Air"
   })
 
-  const [showQuote, setShowQuote] = useState(false)
+  const [quote, setQuote] = useState()
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    const startingCountry = event.target.elements["Starting country"].value
-    const destinationCountry = event.target.elements["Destination country"].value
-    const quotePrice = event.target.elements["Quote price"].value
-    const shippingChannel = event.target.elements["Shipping channel"].value
-
-    setQuote({
-      ...quote, 
-      "Starting country": startingCountry, 
-      "Destination country": destinationCountry, 
-      "Quote price": quotePrice, 
-      "Shipping channel": shippingChannel
-    })
-    setShowQuote(true)
+    setQuote({...quote, ...preQuote})
+  } 
+  
+  const handleChange = (event) => {
+    setPreQuote({...preQuote, [event.target.name]: event.target.value})
   }
 
   return (
     <div className="app-container">
       <form onSubmit={handleSubmit} className="form-container">
-        {fields.map((field) => 
-          <label key={field} className="app-label">
-            {field}
-            <input type="text" name={field} required/>
-          </label>
-        )}
+        <label className="app-label">
+          Starting country
+          <input type="text" name="startingCountry" onChange={handleChange} value={preQuote.startingCountry} required/>
+        </label>
+        <label className="app-label">
+          Destination country
+          <input type="text" name="destinationCountry" onChange={handleChange} value={preQuote.destinationCountry} required/>
+        </label>
         <label className="app-label">
           Quote price
-          <input type="text" name="Quote price" pattern="\d+" required/>
+          <input type="text" name="quotePrice" onChange={handleChange} value={preQuote.quotePrice} required/>
         </label>
         <label className="app-label">
           Shipping Channel
-          <select name="Shipping channel" id="Shipping channel" required>
+          <select name="shippingChannel" onChange={handleChange} value={preQuote.shippingChannel} required>
             {shippingChannels.map((channel) =>
             <option key={channel} >{channel}</option>
             )}
@@ -55,7 +48,7 @@ export function App() {
         </label>
         <button className="app-button" type="submit">Create quote</button>
       </form>
-      {showQuote && <Quote quote={quote}/>}
+      {quote && <Quote quote={quote}/>}
     </div>
   );
 }
