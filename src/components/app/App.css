@@ -10,6 +10,7 @@
   font-weight: 700;
   font-size: 15px;
   margin-bottom: 10px;
+  max-width: 150px;
 }
 
 .app-button{
@@ -26,5 +27,8 @@
 .form-container{
   display: flex;
   flex-direction: column;
-  max-width: 150px;
+}
+
+.error-message{
+  color: red;
 }

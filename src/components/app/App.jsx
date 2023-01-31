@@ -1,21 +1,21 @@
+import { useState } from 'react';
 import './App.css';
 import { Quote } from '../quote/Quote';
-import { useState } from 'react';
 
 export function App() {
-  let shippingChannels = ["Ocean", "Air"]
-
-  const [preQuote, setPreQuote] = useState({
-    startingCountry: "",
-    destinationCountry: "",
-    quotePrice: 0,
-    shippingChannel: "Air"
-  })
+  const shippingChannels = ["Ocean", "Air"]
+  const initialPreQuoteValues = { startingCountry: "", destinationCountry: "", quotePrice: 0, shippingChannel: "Air" }
 
   const [quote, setQuote] = useState()
+  const [preQuote, setPreQuote] = useState(initialPreQuoteValues)
+  const [quoteErrors, setQuoteErrors] = useState({})
 
   const handleSubmit = (event) => {
     event.preventDefault()
+    setQuoteErrors({...quoteErrors, ...validate(preQuote)})
+    if(Object.values(validate(preQuote)).join("")){
+      return
+    }
     setQuote({...quote, ...preQuote})
   } 
   
@@ -23,29 +23,42 @@ export function App() {
     setPreQuote({...preQuote, [event.target.name]: event.target.value})
   }
 
+  const validate = (values) => {
+    const errors = {}
+    errors.startingCountry = !values.startingCountry ? "Starting country is required!" : ""
+    errors.destinationCountry = !values.destinationCountry ? "Destination country is required!" : ""
+    errors.quotePrice =!values.quotePrice ? "Quote price is required!" : ""
+    errors.shippingChannel = !values.shippingChannel ? "Select a shipping channel" : ""
+    return errors
+  }
+
   return (
     <div className="app-container">
-      <form onSubmit={handleSubmit} className="form-container">
+      <form onSubmit={handleSubmit} className="form-container" noValidate>
         <label className="app-label">
           Starting country
-          <input type="text" name="startingCountry" onChange={handleChange} value={preQuote.startingCountry} required/>
+          <input type="text" name="startingCountry" onChange={handleChange} value={preQuote.startingCountry}/>
         </label>
+        <p className="error-message">{quoteErrors.startingCountry}</p>
         <label className="app-label">
           Destination country
-          <input type="text" name="destinationCountry" onChange={handleChange} value={preQuote.destinationCountry} required/>
+          <input type="text" name="destinationCountry" onChange={handleChange} value={preQuote.destinationCountry}/>
         </label>
+        <p className="error-message">{quoteErrors.destinationCountry}</p>
         <label className="app-label">
           Quote price
-          <input type="text" name="quotePrice" onChange={handleChange} value={preQuote.quotePrice} required/>
+          <input type="number" name="quotePrice" onChange={handleChange} value={preQuote.quotePrice}/>
         </label>
+        <p className="error-message">{quoteErrors.quotePrice}</p>
         <label className="app-label">
           Shipping Channel
-          <select name="shippingChannel" onChange={handleChange} value={preQuote.shippingChannel} required>
+          <select name="shippingChannel" onChange={handleChange} value={preQuote.shippingChannel}>
             {shippingChannels.map((channel) =>
             <option key={channel} >{channel}</option>
             )}
           </select>
         </label>
+        <p className="error-message">{quoteErrors.shippingChannel}</p>
         <button className="app-button" type="submit">Create quote</button>
       </form>
       {quote && <Quote quote={quote}/>}

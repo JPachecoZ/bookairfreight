@@ -9,8 +9,6 @@ export function getDeliveryDaysRange(type){
     const minDays = getRandomNumberBetween(startMin, startMax)
     const maxDays = minDays + getRandomNumberBetween(endMin, endMax)
 
-    console.log(`MinDays: `,minDays)
-    console.log(`MaxDays: `,maxDays)
     return {
         minDays,
         maxDays
